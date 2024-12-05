@@ -15,6 +15,10 @@ const Tablero = ({tablero, setTablero, ganador, setGanador, turno, setTurno, TUR
         // Cambiar el turno
         const nuevoTurno = turno === TURNOS.X ? TURNOS.O : TURNOS.X;
         setTurno(nuevoTurno)
+
+        // Guardar en localStorage
+        window.localStorage.setItem("tablero", JSON.stringify(nuevoTablero))
+        window.localStorage.setItem("turno", JSON.stringify(nuevoTurno))
     
         //revisar si hay un ganador
         const nuevoGanador = checkearElGanador(nuevoTablero);

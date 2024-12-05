@@ -9,8 +9,14 @@ import Turnos from './componentes/Turnos';
 
 function App() {
 
-  const [tablero, setTablero] = useState(Array(9).fill(null));
-  const [turno, setTurno] = useState(TURNOS.X);
+  const [tablero, setTablero] = useState(() => {
+    const tableroDelStorage = window.localStorage.getItem("tablero")
+    return tableroDelStorage ? JSON.parse(tableroDelStorage) : Array(9).fill(null);
+  });
+  const [turno, setTurno] = useState(() => {
+    const turnoDelStorage = window.localStorage.getItem("turno");
+    return turnoDelStorage ? JSON.parse(turnoDelStorage) : TURNOS.X
+  });
   const [ganador, setGanador] = useState(null);
 
   // Resetear el juego
@@ -18,6 +24,9 @@ function App() {
     setTablero(Array(9).fill(null));
     setTurno(TURNOS.X);
     setGanador(null)
+
+    window.localStorage.removeItem("tablero");
+    window.localStorage.removeItem("turno");
   }
 
   return (
